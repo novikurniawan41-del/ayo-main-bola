@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Ayo Main Bola! - MPI PJOK Sepakbola Kelas 5-6</title>
- 
+
 <!-- STREAMING_CHUNK: Memuat pustaka eksternal (Tailwind, FontAwesome, Google Fonts) -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
- 
+
 <script>
   tailwind.config = {
     theme: {
@@ -36,19 +36,19 @@
     }
   }
 </script>
- 
+
 <!-- STREAMING_CHUNK: Gaya dasar, layout rasio 16:9 responsif, animasi, dan komponen modal -->
 <style>
   * { font-family: 'Nunito', sans-serif; }
   h1,h2,h3,h4,.font-heading { font-family: 'Baloo 2', cursive; }
- 
+
   html, body {
     height: 100%;
     margin: 0;
     background: linear-gradient(160deg, #BCEBFF 0%, #E9FAE5 55%, #FFF6DB 100%);
     overflow: hidden;
   }
- 
+
   /* Wrapper yang menjaga rasio 16:9 di berbagai ukuran layar (HP, tablet, laptop, smart TV) */
   #stage-outer{
     height:100dvh;
@@ -72,38 +72,38 @@
     display:flex;
     flex-direction:column;
   }
- 
+
   /* Untuk layar yang sangat sempit/tinggi (HP portrait), izinkan tinggi mengikuti lebar */
   @media (max-aspect-ratio: 16/9) {
     #stage{ width:100%; height:calc(100vw * 9 / 16); max-height:96dvh; }
   }
- 
+
   .scrollbox::-webkit-scrollbar{ width:8px; }
   .scrollbox::-webkit-scrollbar-thumb{ background:#c9e8c9; border-radius:8px; }
   .scrollbox::-webkit-scrollbar-track{ background:transparent; }
- 
+
   .nav-btn{ transition: transform .15s ease, background-color .15s ease; }
   .nav-btn:active{ transform: scale(0.94); }
   .nav-btn.active{ background:#fff; color:#2E8B39; box-shadow: 0 4px 0 rgba(0,0,0,0.12); }
- 
+
   .card-pop{ transition: transform .15s ease, box-shadow .15s ease; }
   .card-pop:hover{ transform: translateY(-4px); }
   .card-pop:active{ transform: translateY(0px) scale(.98); }
- 
+
   .btn-pop{ box-shadow: 0 5px 0 rgba(0,0,0,0.18); transition: transform .1s ease, box-shadow .1s ease; }
   .btn-pop:active{ transform: translateY(4px); box-shadow: 0 1px 0 rgba(0,0,0,0.18); }
- 
+
   .tab-pill.active{ background:#3CB043; color:#fff; }
- 
+
   @keyframes floatBall{ 0%,100%{ transform: translateY(0) rotate(0deg);} 50%{ transform: translateY(-10px) rotate(15deg);} }
   .float-anim{ animation: floatBall 2.4s ease-in-out infinite; }
- 
+
   @keyframes popIn{ from{ opacity:0; transform: scale(.85);} to{ opacity:1; transform: scale(1);} }
   .pop-in{ animation: popIn .25s ease-out; }
- 
+
   @keyframes shake{ 10%,90%{transform:translateX(-1px);} 20%,80%{transform:translateX(2px);} 30%,50%,70%{transform:translateX(-4px);} 40%,60%{transform:translateX(4px);} }
   .shake{ animation: shake .5s; }
- 
+
   /* Modal kustom (pengganti alert/confirm) */
   #modal-overlay{
     position:absolute; inset:0; background:rgba(15,40,25,0.55);
@@ -111,23 +111,23 @@
   }
   #modal-overlay.show{ display:flex; }
   #modal-box{ max-width: 90%; width: 420px; max-height:85%; }
- 
+
   .opt-btn{ transition: all .15s ease; }
   .opt-btn.correct{ background:#DFF7E2 !important; border-color:#3CB043 !important; color:#1F3D2B; }
   .opt-btn.wrong{ background:#FFE3E7 !important; border-color:#FF5C7A !important; color:#1F3D2B; }
   .opt-btn.dim{ opacity:.55; }
- 
+
   canvas{ touch-action:none; cursor:crosshair; }
- 
+
   .progress-track{ background:#EAF6E9; }
   .progress-fill{ background: linear-gradient(90deg,#3CB043,#7ED957); transition: width .3s ease; }
 </style>
 </head>
- 
+
 <body>
 <div id="stage-outer">
 <div id="stage">
- 
+
   <!-- STREAMING_CHUNK: Header aplikasi dan navigasi menu utama -->
   <header class="shrink-0 bg-grass text-white flex items-center justify-between px-3 sm:px-5 py-2 sm:py-3 shadow-md relative z-10">
     <div class="flex items-center gap-2">
@@ -155,10 +155,10 @@
       </button>
     </nav>
   </header>
- 
+
   <!-- Konten utama -->
   <main class="relative grow overflow-hidden bg-cream">
- 
+
     <!-- ============ PAGE: BERANDA ============ -->
     <section id="page-home" class="page-panel absolute inset-0 overflow-y-auto scrollbox p-3 sm:p-6">
       <div class="pop-in">
@@ -169,7 +169,7 @@
           </div>
           <i class="fa-solid fa-futbol text-5xl sm:text-7xl text-white/90 float-anim hidden sm:block"></i>
         </div>
- 
+
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
           <button data-target="page-materi" class="card-pop text-left bg-white border-2 border-sky/40 rounded-2xl p-3 sm:p-4 shadow-pop">
             <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-sky/20 flex items-center justify-center text-sky text-lg sm:text-2xl mb-2"><i class="fa-solid fa-book-open"></i></div>
@@ -194,7 +194,7 @@
         </div>
       </div>
     </section>
- 
+
     <!-- ============ PAGE: MATERI ============ -->
     <section id="page-materi" class="page-panel hidden absolute inset-0 overflow-hidden flex flex-col">
       <div class="shrink-0 flex gap-1.5 sm:gap-2 p-2 sm:p-3 bg-white border-b overflow-x-auto">
@@ -202,7 +202,7 @@
         <button data-tab="tab-teknik" class="tab-pill shrink-0 text-[11px] sm:text-sm font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border-2 border-grass text-grassdk"><i class="fa-solid fa-person-running mr-1"></i>Teknik Dasar</button>
         <button data-tab="tab-aturan" class="tab-pill shrink-0 text-[11px] sm:text-sm font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border-2 border-grass text-grassdk"><i class="fa-solid fa-scale-balanced mr-1"></i>Aturan &amp; Sportivitas</button>
       </div>
- 
+
       <div class="grow overflow-y-auto scrollbox p-3 sm:p-6">
         <div id="tab-konsep" class="tab-panel pop-in">
           <h2 class="font-heading text-lg sm:text-2xl text-ink mb-2"><i class="fa-solid fa-futbol text-grass mr-1"></i> Apa itu Sepakbola?</h2>
@@ -226,7 +226,7 @@
           </div>
           <p class="text-xs sm:text-base text-gray-700 leading-relaxed mt-4">Sepakbola melatih kekuatan otot, kelincahan, kerja sama tim, dan disiplin. Karena dimainkan beregu, sepakbola juga mengajarkan kita untuk saling percaya dan menghargai teman satu tim maupun lawan.</p>
         </div>
- 
+
         <div id="tab-teknik" class="tab-panel hidden">
           <h2 class="font-heading text-lg sm:text-2xl text-ink mb-3"><i class="fa-solid fa-shoe-prints text-grass mr-1"></i> Teknik Dasar Sepakbola</h2>
           <div class="grid sm:grid-cols-2 gap-3">
@@ -272,7 +272,7 @@
             </div>
           </div>
         </div>
- 
+
         <div id="tab-aturan" class="tab-panel hidden">
           <h2 class="font-heading text-lg sm:text-2xl text-ink mb-3"><i class="fa-solid fa-scale-balanced text-grass mr-1"></i> Aturan Sederhana &amp; Nilai Sportivitas</h2>
           <div class="grid sm:grid-cols-2 gap-4">
@@ -301,7 +301,7 @@
         </div>
       </div>
     </section>
- 
+
     <!-- ============ PAGE: KUIS ============ -->
     <section id="page-kuis" class="page-panel hidden absolute inset-0 flex flex-col overflow-hidden">
       <div id="kuis-start" class="grow flex flex-col items-center justify-center text-center p-4 sm:p-6">
@@ -310,7 +310,7 @@
         <p class="text-xs sm:text-sm text-gray-500 max-w-sm mb-4">Uji pemahamanmu tentang sepakbola lewat 11 soal pilihan ganda seru!</p>
         <button id="btn-start-quiz" class="btn-pop bg-citrus text-white font-heading text-sm sm:text-lg px-6 sm:px-8 py-2.5 sm:py-3 rounded-full"><i class="fa-solid fa-play mr-1"></i> Mulai Kuis</button>
       </div>
- 
+
       <div id="kuis-play" class="hidden grow flex-col overflow-hidden">
         <div class="shrink-0 px-3 sm:px-6 pt-3 sm:pt-4">
           <div class="flex items-center justify-between text-[11px] sm:text-sm font-bold text-ink mb-1">
@@ -331,7 +331,7 @@
         </div>
       </div>
     </section>
- 
+
     <!-- ============ PAGE: GIM ============ -->
     <section id="page-game" class="page-panel hidden absolute inset-0 flex flex-col overflow-hidden bg-gradient-to-b from-sky/30 to-grass/20">
       <div class="shrink-0 flex items-center justify-between px-3 sm:px-5 py-2 text-[11px] sm:text-sm font-bold text-ink">
@@ -347,17 +347,17 @@
         <button id="btn-shoot" class="btn-pop bg-berry text-white font-heading text-sm sm:text-lg px-6 sm:px-10 py-2 sm:py-2.5 rounded-full"><i class="fa-solid fa-shoe-prints mr-1"></i> Tendang!</button>
       </div>
     </section>
- 
+
     <!-- ============ PAGE: INFO CP/TP ============ -->
     <section id="page-info" class="page-panel hidden absolute inset-0 overflow-y-auto scrollbox p-3 sm:p-6">
       <h2 class="font-heading text-lg sm:text-2xl text-ink mb-3"><i class="fa-solid fa-graduation-cap text-grass mr-1"></i> Informasi &amp; Capaian Pembelajaran</h2>
       <p class="text-[11px] sm:text-sm text-gray-500 mb-4">Kurikulum Merdeka &bull; Mata Pelajaran PJOK &bull; Fase C (Kelas 5-6 SD)</p>
- 
+
       <div class="bg-white border-2 border-grass/30 rounded-2xl p-3 sm:p-5 mb-3 sm:mb-4 shadow-sm">
         <h3 class="font-heading text-sm sm:text-lg text-grassdk mb-2"><i class="fa-solid fa-bullseye mr-1"></i> Capaian Pembelajaran (CP)</h3>
         <p class="text-[11px] sm:text-sm text-gray-700 leading-relaxed">Pada akhir fase C, peserta didik dapat mempraktikkan variasi dan kombinasi berbagai pola gerak dasar lokomotor, non-lokomotor, dan manipulatif dalam bentuk permainan bola besar sederhana, seperti sepakbola, sesuai dengan potensi dan kreativitas yang dimiliki. Peserta didik juga dapat menunjukkan sikap tanggung jawab, kerja sama, dan sportivitas dalam melakukan aktivitas jasmani, serta memahami konsep hidup sehat melalui aktivitas fisik yang dilakukan secara rutin.</p>
       </div>
- 
+
       <div class="bg-white border-2 border-sky/30 rounded-2xl p-3 sm:p-5 shadow-sm">
         <h3 class="font-heading text-sm sm:text-lg text-sky mb-2"><i class="fa-solid fa-list-check mr-1"></i> Tujuan Pembelajaran (TP)</h3>
         <ul class="space-y-2 text-[11px] sm:text-sm text-gray-700">
@@ -367,7 +367,7 @@
           <li class="flex gap-2"><i class="fa-solid fa-4 text-white bg-sky rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[9px] sm:text-[11px] mt-0.5 shrink-0"></i>Peserta didik mampu menunjukkan nilai sportivitas, kerja sama, dan tanggung jawab selama bermain sepakbola.</li>
         </ul>
       </div>
- 
+
       <div class="grid sm:grid-cols-2 gap-3 mt-4">
         <div class="bg-sun/10 border border-sun/40 rounded-xl p-3 text-[11px] sm:text-sm text-ink">
           <p class="font-bold mb-1"><i class="fa-solid fa-book mr-1 text-citrus"></i>Elemen</p>
@@ -379,11 +379,11 @@
         </div>
       </div>
     </section>
- 
+
   </main>
 </div>
 </div>
- 
+
 <!-- STREAMING_CHUNK: Komponen modal kustom (pengganti alert/confirm bawaan browser) -->
 <div id="modal-overlay">
   <div id="modal-box" class="pop-in bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col">
@@ -391,7 +391,7 @@
     <div id="modal-footer" class="flex gap-2 justify-center p-3 sm:p-4 border-t bg-gray-50"></div>
   </div>
 </div>
- 
+
 <script>
 /* STREAMING_CHUNK: Modul Audio - efek suara sintesis (Web Audio API, tanpa file eksternal) */
 const AudioFX = (() => {
@@ -426,7 +426,7 @@ const AudioFX = (() => {
   };
 })();
 document.addEventListener('click', () => { AudioFX; }, {once:true});
- 
+
 /* STREAMING_CHUNK: Modul Navigasi antar halaman / menu utama */
 const pages = document.querySelectorAll('.page-panel');
 const navButtons = document.querySelectorAll('[data-target]');
@@ -438,7 +438,7 @@ function showPage(id){
   activePage.classList.remove('pop-in'); void activePage.offsetWidth; activePage.classList.add('pop-in');
 }
 navButtons.forEach(btn => btn.addEventListener('click', () => { AudioFX.click(); showPage(btn.dataset.target); }));
- 
+
 /* STREAMING_CHUNK: Modul tab pada halaman Materi */
 document.querySelectorAll('#page-materi [data-tab]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -451,7 +451,7 @@ document.querySelectorAll('#page-materi [data-tab]').forEach(btn => {
     panel.classList.remove('pop-in'); void panel.offsetWidth; panel.classList.add('pop-in');
   });
 });
- 
+
 /* STREAMING_CHUNK: Modul Modal kustom - pengganti alert()/confirm() */
 const Modal = {
   overlay: document.getElementById('modal-overlay'),
@@ -471,7 +471,7 @@ const Modal = {
   },
   close(){ this.overlay.classList.remove('show'); }
 };
- 
+
 /* STREAMING_CHUNK: Modul Kuis Interaktif - data soal, logika penilaian, dan umpan balik suara */
 const QUIZ = [
   { q:"Berapa jumlah pemain dalam satu tim sepakbola di lapangan (termasuk kiper)?", opt:["9 pemain","10 pemain","11 pemain","12 pemain"], correct:2, exp:"Satu tim sepakbola terdiri dari 11 pemain termasuk penjaga gawang." },
@@ -487,7 +487,7 @@ const QUIZ = [
   { q:"Teknik menghentikan bola yang datang agar mudah dikuasai disebut...", opt:["Controlling","Dribbling","Shooting","Passing"], correct:0, exp:"Controlling (mengontrol/menghentikan bola) dilakukan dengan kaki, dada, atau paha." }
 ];
 let quizIdx = 0, quizScore = 0, quizAnswered = false;
- 
+
 document.getElementById('btn-start-quiz').addEventListener('click', () => {
   AudioFX.whistle();
   quizIdx = 0; quizScore = 0;
@@ -496,7 +496,7 @@ document.getElementById('btn-start-quiz').addEventListener('click', () => {
   document.getElementById('kuis-play').classList.add('flex');
   renderQuizQuestion();
 });
- 
+
 function renderQuizQuestion(){
   quizAnswered = false;
   const item = QUIZ[quizIdx];
@@ -506,7 +506,7 @@ function renderQuizQuestion(){
   document.getElementById('kuis-question').textContent = `${quizIdx+1}. ${item.q}`;
   document.getElementById('kuis-explain').classList.add('hidden');
   document.getElementById('btn-next-quiz').disabled = true;
- 
+
   const optWrap = document.getElementById('kuis-options');
   optWrap.innerHTML = '';
   item.opt.forEach((optText, i) => {
@@ -517,7 +517,7 @@ function renderQuizQuestion(){
     optWrap.appendChild(b);
   });
 }
- 
+
 function selectQuizOption(i, btnEl){
   if(quizAnswered) return;
   quizAnswered = true;
@@ -542,7 +542,7 @@ function selectQuizOption(i, btnEl){
   expBox.innerHTML = `<i class="fa-solid fa-lightbulb text-sky mr-1"></i><b>Pembahasan:</b> ${item.exp}`;
   document.getElementById('btn-next-quiz').disabled = false;
 }
- 
+
 document.getElementById('btn-next-quiz').addEventListener('click', () => {
   AudioFX.click();
   quizIdx++;
@@ -552,7 +552,7 @@ document.getElementById('btn-next-quiz').addEventListener('click', () => {
     renderQuizQuestion();
   }
 });
- 
+
 function finishQuiz(){
   document.getElementById('kuis-progress-bar').style.width = '100%';
   const pct = Math.round((quizScore / (QUIZ.length*10)) * 100);
@@ -574,14 +574,14 @@ function finishQuiz(){
     { label:'<i class="fa-solid fa-house mr-1"></i>Beranda', cls:'bg-grass', onClick:() => { Modal.close(); document.getElementById('kuis-start').classList.remove('hidden'); document.getElementById('kuis-play').classList.add('hidden'); document.getElementById('kuis-play').classList.remove('flex'); showPage('page-home'); } }
   ]);
 }
- 
+
 /* STREAMING_CHUNK: Modul Gim Arkade Kanvas - "Tendangan Akurat" untuk melatih ketepatan tendangan */
 const Game = (() => {
   const canvas = document.getElementById('game-canvas');
   const ctx = canvas.getContext('2d');
   const W = 800, H = 450;
   canvas.width = W; canvas.height = H;
- 
+
   let score = 0, shots = 10, best = 0, running = false;
   let aimX = W/2, aimY = 120;
   let keeperX = W/2, keeperDir = 1, keeperSpeed = 2.2;
@@ -591,14 +591,16 @@ const Game = (() => {
   let keeperDiveDuration = 380;   // ms, disesuaikan dgn durasi bola melayang
   let keeperStartX = W/2, keeperTargetX = W/2;
   let keeperDiveProgress = 0;
+  let keeperJumpHeight = 26; // tinggi lompatan kiper, menyesuaikan ketinggian bidikan lawan
   let keeperBobPhase = 0;
   let ball = { x: W/2, y: H-45, r: 14, flying:false, t:0 };
   let shotTarget = null;
   let particles = [];
   let rafId = null;
- 
+
   const GOAL = { x: W/2 - 130, y: 55, w: 260, h: 110 };
- 
+  const HIGH_ZONE_FRAC = 0.32; // 32% bagian atas gawang = zona rawan melambung
+
   function loadBest(){
     try{ best = parseInt(localStorage.getItem('mpi_sepakbola_best') || '0', 10) || 0; }catch(e){ best = 0; }
     document.getElementById('game-best').textContent = best;
@@ -607,7 +609,7 @@ const Game = (() => {
     if(score > best){ best = score; try{ localStorage.setItem('mpi_sepakbola_best', String(best)); }catch(e){} }
     document.getElementById('game-best').textContent = best;
   }
- 
+
   function resizeCanvasCss(){
     const parent = canvas.parentElement;
     const availW = parent.clientWidth - 8;
@@ -618,15 +620,16 @@ const Game = (() => {
     canvas.style.height = ch + 'px';
   }
   window.addEventListener('resize', resizeCanvasCss);
- 
+
   function resetRound(){
     ball = { x: W/2, y: H-45, r:14, flying:false, t:0 };
     shotTarget = null;
     keeperState = 'idle';
     keeperDiveDir = 0;
     keeperDiveProgress = 0;
+    keeperJumpHeight = 26;
   }
- 
+
   function drawField(){
     ctx.fillStyle = '#DFF7E2';
     ctx.fillRect(0,0,W,H);
@@ -642,11 +645,27 @@ const Game = (() => {
     ctx.lineWidth = 4;
     ctx.strokeRect(GOAL.x-40, GOAL.y-15, GOAL.w+80, GOAL.h+95);
   }
- 
+
   function drawGoal(){
+    // zona rawan (dekat mistar) - tanda bergaris merah-oranye sebagai peringatan visual
+    const riskH = GOAL.h * HIGH_ZONE_FRAC;
+    ctx.save();
+    const grad = ctx.createLinearGradient(0, GOAL.y, 0, GOAL.y + riskH);
+    grad.addColorStop(0, 'rgba(255,92,122,0.28)');
+    grad.addColorStop(1, 'rgba(255,92,122,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(GOAL.x, GOAL.y, GOAL.w, riskH);
+    ctx.restore();
+
     ctx.strokeStyle = '#1F3D2B';
     ctx.lineWidth = 6;
     ctx.strokeRect(GOAL.x, GOAL.y, GOAL.w, GOAL.h);
+    // mistar gawang dipertegas (batas atas - lewat sini bola melambung)
+    ctx.strokeStyle = '#FF5C7A';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([7,5]);
+    ctx.beginPath(); ctx.moveTo(GOAL.x-6, GOAL.y+riskH); ctx.lineTo(GOAL.x+GOAL.w+6, GOAL.y+riskH); ctx.stroke();
+    ctx.setLineDash([]);
     // jaring
     ctx.strokeStyle = 'rgba(31,61,43,0.35)';
     ctx.lineWidth = 1;
@@ -665,16 +684,16 @@ const Game = (() => {
       ctx.fillRect(GOAL.x + i*zoneW, GOAL.y, zoneW, GOAL.h);
     }
   }
- 
+
   function drawKeeper(){
     const groundY = GOAL.y + GOAL.h - 8;
     const diving = keeperState === 'diving';
     const p = Math.min(keeperDiveProgress, 1);
-    // lompatan naik lalu turun (kurva sinus) saat menyelam
-    const jumpArc = diving ? Math.sin(p * Math.PI) * 22 : Math.sin(keeperBobPhase) * 2.5;
+    // lompatan naik lalu turun (kurva sinus) saat menyelam - tinggi menyesuaikan target bidikan
+    const jumpArc = diving ? Math.sin(p * Math.PI) * keeperJumpHeight : Math.sin(keeperBobPhase) * 2.5;
     const tilt = diving ? keeperDiveDir * Math.min(p * 1.35, 1) * 0.95 : Math.sin(keeperBobPhase) * 0.05;
     const stretch = diving ? Math.min(p * 1.4, 1) : 0;
- 
+
     // bayangan di rumput, memipih saat kiper melompat
     ctx.save();
     ctx.fillStyle = 'rgba(31,61,43,0.18)';
@@ -682,17 +701,17 @@ const Game = (() => {
     ctx.ellipse(keeperX, groundY + 4, 20 - stretch*6, 6 - stretch*3, 0, 0, Math.PI*2);
     ctx.fill();
     ctx.restore();
- 
+
     ctx.save();
     ctx.translate(keeperX, groundY - jumpArc - 34);
     ctx.rotate(tilt);
- 
+
     // kaki
     ctx.fillStyle = '#1F3D2B';
     const legSpread = 8 + stretch*10;
     ctx.beginPath(); ctx.roundRect(-legSpread-4, 26, 9, 22 - stretch*10, 4); ctx.fill();
     ctx.beginPath(); ctx.roundRect(legSpread-5, 26, 9, 22 - stretch*10, 4); ctx.fill();
- 
+
     // badan / jersey
     ctx.fillStyle = '#FF5C7A';
     ctx.beginPath();
@@ -702,7 +721,7 @@ const Game = (() => {
     ctx.font = 'bold 13px "Baloo 2", cursive';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText('1', 0, 10);
- 
+
     // lengan - satu lengan terulur ke arah selam, satu lagi normal
     const reachDir = diving ? keeperDiveDir : (Math.sin(keeperBobPhase) > 0 ? 1 : -1);
     ctx.strokeStyle = '#FFDAB3';
@@ -726,7 +745,7 @@ const Game = (() => {
     ctx.stroke();
     ctx.fillStyle = '#FFC93C';
     ctx.beginPath(); ctx.arc(-reachDir*18, 12, 5.5, 0, Math.PI*2); ctx.fill();
- 
+
     // kepala
     ctx.fillStyle = '#FFDAB3';
     ctx.beginPath();
@@ -734,26 +753,35 @@ const Game = (() => {
     ctx.fill();
     ctx.fillStyle = '#1F3D2B';
     ctx.beginPath(); ctx.arc(-3.5,-19,1.6,0,Math.PI*2); ctx.arc(3.5,-19,1.6,0,Math.PI*2); ctx.fill();
- 
+
     ctx.restore();
   }
- 
+
   function drawAimReticle(){
     if(ball.flying || !running) return;
+    const riskH = GOAL.h * HIGH_ZONE_FRAC;
+    const inRisk = aimY < GOAL.y + riskH;
+    const col = inRisk ? '#FF5C7A' : '#FF8A3D';
     ctx.save();
-    ctx.strokeStyle = '#FF8A3D';
+    ctx.strokeStyle = col;
     ctx.setLineDash([6,5]);
     ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(ball.x, ball.y); ctx.lineTo(aimX, aimY); ctx.stroke();
     ctx.setLineDash([]);
     ctx.beginPath();
     ctx.arc(aimX, aimY, 14, 0, Math.PI*2);
-    ctx.strokeStyle = '#FF8A3D'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.stroke();
     ctx.beginPath(); ctx.moveTo(aimX-8,aimY); ctx.lineTo(aimX+8,aimY); ctx.moveTo(aimX,aimY-8); ctx.lineTo(aimX,aimY+8);
-    ctx.strokeStyle='#FF8A3D'; ctx.lineWidth=2; ctx.stroke();
+    ctx.strokeStyle=col; ctx.lineWidth=2; ctx.stroke();
+    if(inRisk){
+      ctx.fillStyle = col;
+      ctx.font = 'bold 11px "Nunito", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('⚠ rawan melambung', aimX, aimY - 20);
+    }
     ctx.restore();
   }
- 
+
   function drawBall(){
     ctx.save();
     ctx.translate(ball.x, ball.y);
@@ -768,7 +796,7 @@ const Game = (() => {
     }
     ctx.restore();
   }
- 
+
   function drawParticles(){
     particles.forEach(p => {
       ctx.globalAlpha = Math.max(p.life,0);
@@ -783,7 +811,7 @@ const Game = (() => {
         vx:(Math.random()-0.5)*6, vy:(Math.random()-0.7)*6, life:1});
     }
   }
- 
+
   function draw(){
     drawField();
     drawGoal();
@@ -792,7 +820,7 @@ const Game = (() => {
     drawBall();
     drawAimReticle();
   }
- 
+
   function update(dt){
     if(keeperState === 'diving'){
       const elapsed = performance.now() - keeperDiveStart;
@@ -805,10 +833,10 @@ const Game = (() => {
       keeperX += keeperDir * keeperSpeed;
       if(keeperX < GOAL.x + 30 || keeperX > GOAL.x + GOAL.w - 30) keeperDir *= -1;
     }
- 
+
     particles.forEach(p => { p.x+=p.vx; p.y+=p.vy; p.life-=0.03; });
     particles = particles.filter(p => p.life > 0);
- 
+
     if(ball.flying){
       ball.t += 0.05;
       const target = shotTarget;
@@ -821,13 +849,33 @@ const Game = (() => {
       }
     }
   }
- 
+
   function resolveShot(){
     const dx = shotTarget.x - keeperX;
-    const savedByKeeper = Math.abs(dx) < 34 && shotTarget.y > GOAL.y + GOAL.h*0.35;
     const inGoal = shotTarget.x > GOAL.x+8 && shotTarget.x < GOAL.x+GOAL.w-8 && shotTarget.y > GOAL.y+8 && shotTarget.y < GOAL.y+GOAL.h-8;
- 
-    if(inGoal && !savedByKeeper){
+
+    // Jika bidikan berada di atas mistar (di luar kotak gawang bagian atas) -> pasti melambung
+    const aboveCrossbar = shotTarget.y < GOAL.y + 8;
+
+    // Zona rawan: makin dekat ke mistar, makin besar peluang bola melambung meski dibidik "masuk"
+    const riskH = GOAL.h * HIGH_ZONE_FRAC;
+    const distFromBar = shotTarget.y - GOAL.y; // 0 = pas di mistar
+    let ballooned = false;
+    if(inGoal && distFromBar < riskH){
+      const closeness = 1 - (distFromBar / riskH); // 1 = tepat di mistar, 0 = batas zona rawan
+      const missChance = 0.55 * closeness; // maks 55% peluang melambung di titik paling atas
+      if(Math.random() < missChance) ballooned = true;
+    }
+
+    const savedByKeeper = !ballooned && Math.abs(dx) < 34 && shotTarget.y > GOAL.y + GOAL.h*0.35;
+
+    if(aboveCrossbar){
+      AudioFX.miss();
+      showFloatMsg('Melambung ke atas mistar!', '#9CA3AF');
+    } else if(ballooned){
+      AudioFX.miss();
+      showFloatMsg('Terlalu tinggi, melambung!', '#FF8A3D');
+    } else if(inGoal && !savedByKeeper){
       score += 10;
       AudioFX.goal();
       spawnParticles(shotTarget.x, shotTarget.y, '#FFC93C');
@@ -849,7 +897,7 @@ const Game = (() => {
       if(shots <= 0){ endGame(); }
     }, 500);
   }
- 
+
   function showFloatMsg(text, color){
     const el = document.createElement('div');
     el.textContent = text;
@@ -860,7 +908,7 @@ const Game = (() => {
     requestAnimationFrame(() => { el.style.transform='translate(-50%,-90%)'; el.style.opacity='0'; });
     setTimeout(() => el.remove(), 750);
   }
- 
+
   function endGame(){
     running = false;
     saveBest();
@@ -878,7 +926,7 @@ const Game = (() => {
       { label:'<i class="fa-solid fa-house mr-1"></i>Beranda', cls:'bg-grass', onClick:() => { Modal.close(); showPage('page-home'); } }
     ]);
   }
- 
+
   function startGame(){
     score = 0; shots = 10; keeperSpeed = 2.2; keeperX = W/2; running = true;
     keeperState = 'idle'; keeperDiveDir = 0; keeperDiveProgress = 0; keeperBobPhase = 0;
@@ -886,7 +934,7 @@ const Game = (() => {
     document.getElementById('game-shots').textContent = shots;
     resetRound();
   }
- 
+
   function pointerPos(evt){
     const rect = canvas.getBoundingClientRect();
     const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
@@ -899,22 +947,22 @@ const Game = (() => {
     if(!running || ball.flying) return;
     const p = pointerPos(evt);
     aimX = Math.min(GOAL.x+GOAL.w-10, Math.max(GOAL.x+10, p.x));
-    aimY = Math.min(GOAL.y+GOAL.h-10, Math.max(GOAL.y+10, p.y));
+    aimY = Math.min(GOAL.y+GOAL.h-10, Math.max(GOAL.y-30, p.y));
   }
   canvas.addEventListener('mousemove', setAim);
   canvas.addEventListener('touchmove', (e) => { setAim(e); }, {passive:true});
   canvas.addEventListener('click', (e) => { setAim(e); shoot(); });
   canvas.addEventListener('touchstart', (e) => { setAim(e); }, {passive:true});
- 
+
   document.getElementById('btn-shoot').addEventListener('click', shoot);
- 
+
   function shoot(){
     if(!running || ball.flying || shots <= 0) return;
     AudioFX.swoosh();
     shotTarget = { x: aimX, y: aimY };
     ball.flying = true; ball.t = 0;
     ball.startX = ball.x; ball.startY = ball.y;
- 
+
     // kiper bereaksi & menyelam ke arah bola ditendang
     keeperState = 'diving';
     keeperDiveStart = performance.now();
@@ -922,17 +970,20 @@ const Game = (() => {
     keeperTargetX = Math.min(GOAL.x + GOAL.w - 34, Math.max(GOAL.x + 34, shotTarget.x));
     keeperDiveDir = keeperTargetX >= keeperStartX ? 1 : -1;
     keeperDiveProgress = 0;
+    // tinggi lompatan menyesuaikan ketinggian bidikan: makin ke atas (dekat mistar), makin tinggi lompat kiper
+    const heightFrac = 1 - Math.min(1, Math.max(0, (shotTarget.y - GOAL.y) / GOAL.h)); // 1 = sejajar mistar, 0 = di tanah
+    keeperJumpHeight = 26 + heightFrac * 62; // rentang 26px (bawah) - 88px (sejajar mistar)
     // durasi menyelam mengikuti durasi bola melayang (~20 frame @60fps)
     keeperDiveDuration = 330;
   }
- 
+
   function loop(){
     ctx.clearRect(0,0,W,H);
     update();
     draw();
     rafId = requestAnimationFrame(loop);
   }
- 
+
   function onEnter(){
     resizeCanvasCss();
     if(!running){ startGame(); }
@@ -941,7 +992,7 @@ const Game = (() => {
   function onLeave(){
     if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
   }
- 
+
   document.getElementById('btn-game-info').addEventListener('click', () => {
     Modal.open(`
       <div class="text-center">
@@ -950,16 +1001,17 @@ const Game = (() => {
         <p class="text-[11px] sm:text-sm text-gray-600 text-left">1. Gerakkan jari/mouse di dalam gawang untuk membidik arah tendangan.<br>
         2. Tekan tombol <b>Tendang!</b> atau tap di kanvas untuk menendang bola.<br>
         3. Hindari posisi kiper agar bola tidak tertangkap.<br>
-        4. Kamu punya 10 kali tendangan — cetak skor sebanyak mungkin!</p>
+        4. <b>Hati-hati membidik terlalu tinggi</b> (dekat mistar/garis merah) &mdash; makin dekat mistar, makin besar peluang bola melambung meski terlihat mengarah ke gawang!<br>
+        5. Kamu punya 10 kali tendangan — cetak skor sebanyak mungkin!</p>
       </div>
     `, [{label:'Siap, Main!', cls:'bg-sky', onClick:() => Modal.close()}]);
   });
- 
+
   loadBest();
- 
+
   return { onEnter, onLeave };
 })();
- 
+
 /* STREAMING_CHUNK: Inisialisasi awal aplikasi */
 showPage('page-home');
 </script>
